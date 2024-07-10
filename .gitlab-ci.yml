@@ -1,0 +1,25 @@
+# Define stages for the CI/CD pipeline
+stages:
+  - test
+
+# Define variables for PostgreSQL configuration
+variables:
+  POSTGRES_HOST: postgres
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: webgroove
+
+# Define services to be used in the pipeline
+services:
+  - name: postgres:latest
+    alias: postgres
+
+# Jobs definition
+test:
+  stage: test
+  image: node:20
+  before_script:
+    - cd backend
+    - npm install
+  script:
+    - npm test
